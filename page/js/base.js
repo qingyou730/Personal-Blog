@@ -72,14 +72,16 @@ var newComments = new Vue({
             url: "/queryNewComments",
         }).then(function(resp) {
             var result = [];
+            console.log(resp.data.data[0].ctime)
             for(let i = 0; i < resp.data.data.length; i ++) {
                 var temp = {};
                 temp.name = resp.data.data[i].user_name;
-                temp.date = resp.data.data[i].ctime;
+                temp.date = new Date(resp.data.data[i].ctime*1000).toLocaleDateString();
                 temp.comment = resp.data.data[i].comments;
                 result.push(temp)
             }
             newComments.commentList=result;
+            console.log(result)
         });
     },
 
